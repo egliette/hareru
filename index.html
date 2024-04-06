@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youtube Dictation</title>
+<link rel="icon" href="assets/logo.png" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="header">
+    <div id="brand">
+      <img id="logoImg" src="assets/logo.png" alt="Logo">
+      <h1>Youtube Dictation</h1>
+    </div>
+    <button id="settingButton" onclick="showPopup('settingPopup')">
+      <img src="assets/setting_icon.svg" alt="Settings Icon">
+    </button>
+  </div>
+  
+  <div class="twoHorizontalSections">
+    <div id="videoSection">
+      <div class="urlContainer">
+        <input type="text" id="videoUrl" placeholder="Enter YouTube Video URL">
+        <button onclick="playVideo()" id="playButton">Play Video</button>
+      </div>
+  
+      <div class="video-container" id="videoContainer"></div>
+    </div>
+  
+    <div id="dictationSection">
+      <div class="result-container">
+        <div class="progress-bar">
+          <div class="progress" id="transcriptProgress"></div>
+          <p id="currentPart">0/0</p>
+        </div>
+        <p id="identicalText"></p>
+        <span id="nextWord"></span>
+        <p id="hiddenWords"></p>
+      </div>
+
+      <div class="button-container">
+        <button onclick="skipBackward()">Skip Backward</button>
+        <button onclick="replay()">Replay [Ctrl]</button>
+        <button onclick="skipForward()">Skip Forward</button>
+      </div>
+  
+      <div class="answer-container">
+        <textarea id="answerInput"></textarea>
+        <div class="answer-button-container">
+          <button id="checkAnswer" onclick="checkAnswer()">Check [Enter]</button>
+          <button id="skipAnswer" onclick="skipAnswer()">Skip</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="overlay"></div>
+  <div class="popup" id="settingPopup">
+    <h2 class="title">Setting</h2>
+    <p> How would you like to split your dictation video? </p>
+    <div class="setting-fields">
+      <div class="field" id="paragraphsOption">
+        <input type="radio" class="radio-button" name="splitMethod" id="paragraphsMethodRadioButton">
+        <input type="number" class="number-input" id="paragraphsPerPart" value="1" min="1">
+        <span>paragraphs per part</span>
+      </div>
+      <div class="field" id="secondsOption">
+        <input type="radio" class="radio-button" name="splitMethod" id="secondsMethodRadioButton">
+        <input type="number" class="number-input" id="secondsPerPart" value="5" min="1">
+        <span class="unselected-color">seconds per part</span>
+      </div>
+    </div>
+    <div class="button-fields">
+      <button id="updateButton" onclick="updateSetting()">
+        Update
+      </button>
+      <button id="cancelButton" onclick="hidePopup('settingPopup')">
+        Cancel
+      </button>
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+</html>

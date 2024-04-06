@@ -1,0 +1,281 @@
+#reset-this-root {
+    all: unset;
+}
+
+/* https://coolors.co/palette/ffd6ff-e7c6ff-c8b6ff-b8c0ff-bbd0ff */
+html, body {
+    margin:0;
+    padding:0;
+}
+
+h1 {
+    margin:0;
+}
+
+.header  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e44996;
+    color: white;
+    font-family: sans-serif;  
+    height: 80px;     
+}
+
+.header #brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    height: 100%;
+}
+
+.header #brand #logoImg{
+    display: inline;
+    height: 70%;
+}
+
+.header #brand h1 {
+    display: inline;
+    margin-left: 10px;
+}
+
+.header #settingButton {
+    background-color: #e44996;  
+    border: 0px;
+    padding: 15px 20px;
+    display: inline;
+    float: right;
+    height: 100%;
+}
+
+.header #settingButton:hover {
+    background-color: #fa90c5;  
+}
+
+.header #settingButton img {
+    height: 100%;
+}
+
+.twoHorizontalSections {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: auto; 
+    gap: 10px; 
+}
+
+.videoSection, .dictationSection {
+    padding: 10px;
+}
+
+.urlContainer {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.urlContainer #videoUrl {
+    width: 80%;
+    margin-right: 30px;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: #42BFDD;
+}
+
+.twoHorizontalSections button {
+    font-size: 18px;
+    font-family: sans-serif;
+    background-color: #42BFDD;
+    color: white;
+    border-color: #42BFDD;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#videoContainer {
+    display: block;
+    margin: 20px;
+    padding: 10px;
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: #42BFDD;
+    height: 350px;
+    
+}
+
+.result-container {
+    padding: 40px 20px 20px 20px;
+    text-align: center;
+}
+
+.button-container {
+    margin: 10px;
+    display: flex;
+    justify-content: center; 
+    gap: 30px;
+}
+
+.button-container button {
+    width: 150px;
+}
+
+.result-container {
+    font-size: 18px;
+    font-family: monospace;
+}
+
+#identicalText {
+    color: green;
+    display: inline;
+}
+
+#nextWord {
+    color: red;
+    display: inline;
+}
+
+#hiddenWords {
+    display: inline;
+}
+
+.answer-container{
+    padding: 20px;
+}
+
+#answerInput {
+    font-size: 18px;
+    font-family: sans-serif;
+    display: block;
+    height: 200px;
+    margin: 10px 0px 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    border-color: #42BFDD;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    word-break: break-word;
+}
+
+.answer-button-container button {
+    background-color: #8182bb;
+    border-color: #8182bb;
+}
+
+.answer-button-container #skipAnswer{
+    width: 100px;
+    margin-left: 20px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 30px;
+    border: 2px solid #e44996;
+    position: relative;
+    border-radius: 100px;
+    margin-bottom: 30px;
+}
+  
+.progress {
+    width: 5%;
+    height: 100%;
+    background-color: #e7aee4; /* Progress color */
+    border-radius: 100px;
+}
+
+#currentPart {
+    position: absolute;
+    top: -50%;
+    left: 50%;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    /* height: 500px; */
+    padding: 10px 10px 30px 10px;
+    background: #FFF;   
+    border-radius: 30px;
+    z-index: 20;
+    font-family: sans-serif;   
+}
+
+.popup .title {
+    text-align: center;
+    color: #e44996;
+    font-size: 40px;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5); 
+    z-index: 1; 
+}
+
+.popup p {
+    text-align: center;
+    color: #228198;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.popup .setting-fields {
+    padding: 10px 40px;
+    font-size: 20px;
+}
+
+.popup .setting-fields .field {
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center; 
+}
+
+.popup .setting-fields .field .radio-button {
+    margin-right: 30px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+
+}
+
+.popup .setting-fields .field .number-input {
+    margin-right: 10px;
+    font-size: 20px;
+    width: 60px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #42BFDD;
+}
+
+.popup .setting-fields .field span{
+    color: #6fc1d5;
+    font-weight: bold;
+}
+
+.popup button {
+    font-size: 18px;
+    font-family: sans-serif;
+    background-color: #42BFDD;
+    color: white;
+    border-color: #42BFDD;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.popup .button-fields {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}
