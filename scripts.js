@@ -4,14 +4,15 @@ var originaltranscriptList;
 var transcriptList;
 var intervalIdList = [];
 
-var nextWord = $("nextWord");
-var answerInput = $("answerInput"); 
-var identicalText = $("identicalText");
-var hiddenWords = $("hiddenWords");
-var checkAnswerButton = $("checkAnswer");
-var currentPart = $("currentPart");
-var videoUrl = $("videoUrl");
-var progress = $("transcriptProgress");
+var videoUrl = $("video-url");
+
+var nextWord = $("next-word");
+var answerInput = $("answer-input"); 
+var identicalText = $("identical-text");
+var hiddenWords = $("hidden-words");
+var checkAnswerButton = $("check-answer");
+var currentPart = $("current-part");
+var progress = $("transcript-progress");
 
 var paragraphsMethodRadioButton = $("paragraphsMethodRadioButton");
 var secondsMethodRadioButton = $("secondsMethodRadioButton");
@@ -25,7 +26,7 @@ function $(id) {
 }
 
 function showPopup(id) {
-	$(id).style.display ='block';
+	$(id).style.display ='flex';
   $("overlay").style.display = 'block';
 }
 
@@ -50,12 +51,10 @@ answerInput.addEventListener("keydown", function(event) {
 
 async function playVideo() {
   const videoId = extractVideoId(videoUrl.value);
-  
   if (player == null) {
-    player = new YT.Player('videoContainer', {
-        height: '390',
-        width: '640',
+    player = new YT.Player('video-container', {
         videoId: videoId,
+        width: "100%",
         playerVars: {
         'playsinline': 1
         },
@@ -63,7 +62,6 @@ async function playVideo() {
   } else {
     player.loadVideoById(videoId);
     player.pauseVideo();
-
   }
 
   originaltranscriptList = await fetchTranscripts(videoId);
@@ -179,7 +177,9 @@ function enterToNext(event) {
 }
 
 function cleanText(text) {
-  return text.replace(/[^\w\s-]/gi, '').toLowerCase().trim(); 
+  // return text.replace(/[^\w\s\-]/gi, '').toLowerCase().trim(); 
+  text = text.replace(/\u2013|\u2014/g, "-");
+  return text.replace(/[^\w\s-]/gi, '').toLowerCase().trim();
 }
 
 function splitText(text) {
@@ -383,5 +383,5 @@ function updateSetting() {
   }
   currentId = 0;
   resetAnswer();
-  hidePopup('settingPopup')
+  hidePopup('setting-popup')
 }
