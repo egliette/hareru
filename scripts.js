@@ -21,6 +21,7 @@ var secondsPerPart = $("secondsPerPart");
 
 paragraphsMethodRadioButton.checked = true;
 
+
 function $(id) {
   return document.getElementById(id);
 }
@@ -40,8 +41,6 @@ videoUrl.addEventListener("keydown", function(event) {
     playVideo();
   }
 })
-
-answerInput.addEventListener("keydown", enterToCheck);
 
 answerInput.addEventListener("keydown", function(event) {
   if (event.key === "Enter") {
@@ -262,15 +261,19 @@ function checkAnswer() {
   let correctUserWords = correctWords.slice(0, correctLocation);
   let newUserWords;
   
-  let nextUserWords = userWords.slice(correctLocation, userWords.length)
+  let nextUserWords = userWords.slice(correctLocation, userWords.length);
+
+  // if user typed the last words, press Enter will go to next sentence instead
+  // of check result
   if (nextWordValue === undefined) {
     checkAnswerButton.textContent = "Next [Enter]"
     answerInput.removeEventListener("keydown", enterToCheck);
     answerInput.addEventListener("keydown", enterToNext);
+    checkAnswerButton.onclick = goNextScript;
   } else {
     newUserWords = correctUserWords.concat(nextUserWords);
   }
-  
+
   let newUserAnswer = newUserWords.join(" ");
   let newCursorLocation = correctUserWords.join(" ").length + 1; 
 
@@ -300,6 +303,7 @@ function goNextScript() {
   checkAnswerButton.textContent = "Check [Enter]"
   answerInput.removeEventListener("keydown", enterToNext);
   answerInput.addEventListener("keydown", enterToCheck);
+  checkAnswerButton.onclick = checkAnswer;
   skipForward();
 }
 

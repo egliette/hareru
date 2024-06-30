@@ -21,14 +21,16 @@ h1 {
     background-color: #e44996;
     color: white;
     font-family: sans-serif;  
-    height: 80px;     
+    height: 3.75em;     
 }
 
 .header .logo-and-name {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 0.625em;
+    margin-left: 0.625em;
+    gap: 0.625em;
     height: 100%;
 }
 
@@ -39,12 +41,13 @@ h1 {
 
 .header .logo-and-name .site-name {
     display: inline;
+    font-size: 1.563em;
 }
 
 .header .setting-button {
     background-color: #e44996;  
     border: 0px;
-    padding: 15px 20px;
+    padding: 0.938em 1.25em;
     display: inline;
     float: right;
     height: 100%;
@@ -64,17 +67,17 @@ h1 {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    gap: 10px;
+    gap: 0.625em;
 }
 
 .video-dictation-container button {
-    font-size: 18px;
+    font-size: 1em;
     font-family: sans-serif;
     background-color: #42BFDD;
     color: white;
     border-color: #42BFDD;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 0.625em;
+    border-radius: 0.625em;
 }
 
 .video-section, .dictation-section {
@@ -84,53 +87,53 @@ h1 {
 } 
 
 .video-section {
-    padding: 20px;
-    gap: 10px;
+    padding: 1.25em;
+    gap: 0.625em;
 }
 
 .video-section .url-container {
     display: flex;
     justify-content: space-around;
-    gap: 20px;
+    gap: 1.25em;
 }
 
 .video-section .url-container #video-url {
     flex: 3 1 0px;
-    font-size: 18px;
-    padding: 0px 10px;
-    border-radius: 10px;
-    border-color: #42BFDD;
+    font-size: 1em;
+    padding: 0px 0.625em;
+    border-radius: 0.625em;
+    border: 2px solid #42BFDD;
 }
 
 .video-section .url-container .play-button {
-    font-size: 18px;
-    border-radius: 10px;
+    font-size: 1em;
+    border-radius: 0.625em;
     border-color: #42BFDD;
 }
 
 .video-section #video-container {
     border: 2px solid;
-    border-radius: 10px;
+    border-radius: 0.625em;
     border-color: #42BFDD;
-    height: 350px;   
+    height: 21.875em;   
 }
 
 .dictation-section {
-    padding: 20px;
-    gap: 10px;
+    padding: 1.25em;
+    gap: 0.625em;
 }
 
 .dictation-section .result-container {
     display: flex;
     flex-direction: column;
     text-align: center;
-    gap: 20px;
+    gap: 1.25em;
 }
 
 .dictation-section .result-container .progress-bar {
     width: 100%;
     height: 30px;
-    border: 2px solid #e44996;
+    border: 3px solid #e44996;
     position: relative;
     border-radius: 100px;
 }
@@ -144,6 +147,7 @@ h1 {
 
 .dictation-section .result-container #current-part {
     position: absolute;
+    font-size: 1.4em;
     top: -10%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -152,11 +156,11 @@ h1 {
 .dictation-section .button-container {
     display: flex;
     justify-content: space-evenly; 
-    gap: 10px;
+    gap: 0.625em;
 }
 
 .dictation-section .result-container {
-    font-size: 18px;
+    font-size: 1em;
     font-family: monospace;
 }
 
@@ -177,26 +181,28 @@ h1 {
 .dictation-section .answer-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.625em;
 }
 
 .dictation-section .answer-container #answer-input {
-    font-size: 18px;
+    flex: 2 0 auto; 
+    height: 100%;
+    font-size: 1em;
     font-family: sans-serif;
     display: block;
-    height: 200px;
-    font-size: 18px;
-    border-radius: 10px;
-    border-color: #42BFDD;
+    /* height: 12.5em; */
+    font-size: 1em;
+    border-radius: 0.625em;
+    border: 2px solid #42BFDD;
     width: 100%;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 1.25em;
     word-break: break-word;
 }
 
 .dictation-section .answer-button-container {
     display: flex;
-    gap: 10px;
+    gap: 0.625em;
 }
 
 .dictation-section .answer-button-container button {
@@ -212,13 +218,13 @@ h1 {
     transform: translate(-50%, -50%);
     width: 500px;
     /* height: 500px; */
-    padding: 20px;
+    padding: 1.25em;
     background: #FFF;   
     border-radius: 30px;
     z-index: 20;
     font-family: sans-serif;  
     flex-direction: column; 
-    gap: 20px;
+    gap: 1.25em;
 }
 
 
@@ -244,16 +250,16 @@ h1 {
     text-align: center;
     color: #228198;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 1.25em;
     margin: 0px;
 }
 
 .popup .setting-fields {
-    font-size: 20px;
+    font-size: 1.25em;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+    gap: 1.25em;
+    padding: 1.25em;
 }
 
 .popup .setting-fields .field {
@@ -263,17 +269,17 @@ h1 {
 
 .popup .setting-fields .field .radio-button {
     margin-right: 30px;
-    width: 25px;
-    height: 25px;
+    width: 1.563em;
+    height: 1.563em;
     text-align: center;
 }
 
 .popup .setting-fields .field .number-input {
-    margin-right: 10px;
-    font-size: 20px;
+    margin-right: 0.625em;
+    font-size: 1.25em;
     width: 60px;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 0.625em;
+    border-radius: 0.625em;
     border: 2px solid #42BFDD;
 }
 
@@ -283,13 +289,13 @@ h1 {
 }
 
 .popup button {
-    font-size: 18px;
+    font-size: 1em;
     font-family: sans-serif;
     background-color: #42BFDD;
     color: white;
     border-color: #42BFDD;
-    padding: 15px;
-    border-radius: 10px;
+    padding: 0.938em;
+    border-radius: 0.625em;
 }
 
 .popup .button-fields {
