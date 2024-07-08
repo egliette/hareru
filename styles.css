@@ -102,7 +102,7 @@ h1 {
     font-size: 1em;
     padding: 0px 0.625em;
     border-radius: 0.625em;
-    border: 2px solid #42BFDD;
+    border: 0.125em solid #42BFDD;
 }
 
 .video-section .url-container .play-button {
@@ -112,7 +112,7 @@ h1 {
 }
 
 .video-section #video-container {
-    border: 2px solid;
+    border: 0.125em solid;
     border-radius: 0.625em;
     border-color: #42BFDD;
     height: 21.875em;   
@@ -132,17 +132,17 @@ h1 {
 
 .dictation-section .result-container .progress-bar {
     width: 100%;
-    height: 30px;
-    border: 3px solid #e44996;
+    height: 1.875em;
+    border: 0.188em solid #e44996;
     position: relative;
-    border-radius: 100px;
+    border-radius: 6.25em;
 }
   
 .dictation-section .result-container .progress {
     width: 5%;
     height: 100%;
     background-color: #e7aee4; /* Progress color */
-    border-radius: 100px;
+    border-radius: 6.25em;
 }
 
 .dictation-section .result-container #current-part {
@@ -150,7 +150,7 @@ h1 {
     font-size: 1.4em;
     top: -10%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -70%);
 }
 
 .dictation-section .button-container {
@@ -193,7 +193,7 @@ h1 {
     /* height: 12.5em; */
     font-size: 1em;
     border-radius: 0.625em;
-    border: 2px solid #42BFDD;
+    border: 0.125em solid #42BFDD;
     width: 100%;
     box-sizing: border-box;
     padding: 1.25em;
@@ -216,11 +216,12 @@ h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 500px;
-    /* height: 500px; */
+    /* width: 31.25em; */
+    width: 40%;
+    /* height: 31.25em; */
     padding: 1.25em;
     background: #FFF;   
-    border-radius: 30px;
+    border-radius: 1.875em;
     z-index: 20;
     font-family: sans-serif;  
     flex-direction: column; 
@@ -242,7 +243,7 @@ h1 {
 .popup .title {
     text-align: center;
     color: #e44996;
-    font-size: 30px;
+    font-size: 1.875em;
     margin: 0px;  
 }
 
@@ -268,7 +269,7 @@ h1 {
 }
 
 .popup .setting-fields .field .radio-button {
-    margin-right: 30px;
+    margin-right: 1.875em;
     width: 1.563em;
     height: 1.563em;
     text-align: center;
@@ -277,10 +278,10 @@ h1 {
 .popup .setting-fields .field .number-input {
     margin-right: 0.625em;
     font-size: 1.25em;
-    width: 60px;
+    width: 3.75em;
     padding: 0.625em;
     border-radius: 0.625em;
-    border: 2px solid #42BFDD;
+    border: 0.125em solid #42BFDD;
 }
 
 .popup .setting-fields .field span{
@@ -302,5 +303,126 @@ h1 {
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 60px;
+    gap: 3.75em;
+}
+
+@media only screen and (max-width: 46.1875em) {
+
+    .header  {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #e44996;
+        color: white;
+        font-family: sans-serif;  
+        height: 2.5em;     
+    }
+
+    .header .logo-and-name .site-name {
+        display: inline;
+        font-size: 1em;
+    }
+    
+    .header .setting-button {
+        background-color: #e44996;  
+        border: 0px;
+        padding: 0.8em 1em;
+        display: inline;
+        float: right;
+        height: 100%;
+    }
+
+    .video-dictation-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 0em;
+    }
+
+    .video-section #video-container {
+        border: 0.125em solid;
+        border-radius: 0.625em;
+        border-color: #42BFDD;
+        height: 14em;   
+    }
+    
+    .video-section {
+        padding: 1em 1em 0em 1em;
+        gap: 0.6em;
+        font-size: 0.8em;
+    }
+
+    .dictation-section {
+        padding: 1em;
+        gap: 0.6em;
+        font-size: 0.8em;
+    }
+
+    .video-section .url-container {
+        display: flex;
+        justify-content: space-around;
+        gap: 0.8em;
+    }
+    
+    .video-section .url-container #video-url {
+        flex: 3 1 0px;
+        padding: 0px 0.625em;
+        border-radius: 0.625em;
+        border: 0.125em solid #42BFDD;
+    }
+    
+    .video-section .url-container .play-button {
+        border-radius: 0.625em;
+        border-color: #42BFDD;
+    }
+
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        /* width: 31.25em; */
+        width: 60%;
+        /* height: 31.25em; */
+        padding: 1.25em;
+        background: #FFF;   
+        border-radius: 1.875em;
+        z-index: 20;
+        font-family: sans-serif;  
+        flex-direction: column; 
+        gap: 0.8em;
+        font-size: 0.8em;
+    }
+
+    .popup .setting-fields {
+        font-size: 1em;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25em;
+        padding: 1.25em;
+    }
+    
+    .popup .setting-fields .field .radio-button {
+        margin-right: 1em;
+        width: 1em;
+        height: 1em;
+        text-align: center;
+    }    
+
+    .popup .setting-fields .field .number-input {
+        margin-right: 0.525em;
+        font-size: 1em;
+        width: 2.75em;
+        padding: 0.525em;
+        border-radius: 0.625em;
+        border: 0.125em solid #42BFDD;
+    }
+
+    .popup .button-fields {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 1em;
+    }
 }
