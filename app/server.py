@@ -1,9 +1,18 @@
+import os
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 from youtube_transcript_api import YouTubeTranscriptApi
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="frontend/public", html=True), name="static")
+@app.get("/", response_class=HTMLResponse)
+async def read_root():
+    with open("frontend/public/index.html") as f:
+        return HTMLResponse(content=f.read())
 
 # Configure CORS
 origins = [
@@ -36,4 +45,3 @@ if __name__ == "__main__":
 
 
 
-# uvicorn server:app --reload
