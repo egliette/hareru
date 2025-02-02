@@ -1,0 +1,251 @@
+:root {
+    --header-color: #F6B827;
+    --video-color: #F87D08;
+    --text-color: #617B47;
+    --answer-color: #8DBA30;
+    --video-height: 320px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;  
+}
+
+body * {
+    font-family: "Solway", serif;
+}
+
+.navbar {
+    background-color: var(--header-color);
+}
+
+.navbar .row {
+    height: 56px;
+    display: flex; 
+    justify-content: space-between;
+}
+
+.navbar .logo {
+    height: 100%;
+    display: flex; 
+    align-items: center;
+    gap: 8px;
+}
+
+.navbar .logo img{
+    height: 60%;
+    width: auto;
+    display: block;
+}
+
+.navbar .logo h1 {
+    font-size: 30px;
+    color: white;
+    font-weight: bold;
+    display: block;
+}
+
+
+.navbar .navbar-button-container {
+    display: flex;
+}
+
+.navbar .navbar-button {
+    color: white;
+    font-weight: bold;
+    font-size: 24px;
+    height: 100%;
+    display: flex; 
+    align-items: center;
+    padding: 0px 16px;
+}
+
+.navbar .navbar-button:hover {
+    color: var(--header-color);
+    background-color: white;
+}
+
+.video-section .video-url {
+    margin-top: 16px;
+    height: 40px;
+    width: 100%;
+    display: flex;
+    border: 2px solid var(--video-color);
+    border-radius: 20px;
+    background-color: white;
+}
+
+.video-section .video-url #url-input {
+    flex-grow: 1;
+    border: none;
+    border-radius: 20px;
+    padding: 0px 16px;
+    background-color: white;
+    font-size: 20px;
+    color: var(--video-color);
+}
+
+.video-section .video-url #url-input:focus {
+    outline: none;
+}
+
+.video-section .video-url button {
+    border: 2px solid var(--video-color);
+    margin: -2px;
+    border-radius: 20px;
+    padding: 0px 8px;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 16px;
+    background-color: var(--video-color);
+    color: white;
+}
+
+.video-section .video-url button:hover {
+    background-color: white;
+    color: var(--video-color);
+}
+
+.video-section .video-url button:active {
+    background-color: var(--video-color);
+    color: white;
+}
+
+.video-section .video-player {
+    margin-top: 16px;
+    height: var(--video-height);
+    border: 2px solid var(--video-color);
+    border-radius: 30px; 
+}
+
+.video-section .progress-bar {
+    margin-top: 16px;
+    height: 40px;
+    width: 100%;
+    border: 2px solid var(--video-color);
+    border-radius: 20px;
+    background-color: var(--header-color);    
+    position: relative;
+}
+
+.video-section .progress-bar .complete-bar {
+    box-sizing: content-box; 
+    height: 100%;
+    width: 50%;
+    border: 2px solid var(--video-color);
+    margin-top: -2px;
+    border-radius: 20px;
+    background-color: var(--video-color);   
+}
+
+.video-section .progress-bar .complete-number {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.video-section .video-button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.btn {
+    box-sizing: content-box; 
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--video-color);
+    border-radius: 20px;
+    background-color: var(--video-color);  
+    color: white;
+    font-weight: bold;
+    height: 36px;
+    padding: 0 24px;
+    font-size: 20px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Small soft shadow */
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.btn:hover {
+    background-color: white;  
+    color: var(--video-color);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3); /* Bigger shadow on hover */
+}
+
+.btn:active {
+    background-color: var(--video-color);
+    color: white;
+}
+
+.answer-section #user-input {
+    margin: 72px 0 0 0;
+    height: var(--video-height);
+    width: 100%;
+    border: 2px solid var(--answer-color);
+    border-radius: 30px;
+    padding: 0px 16px;
+    background-color: white;
+    font-size: 20px;
+    color: var(--text-color);
+    padding: 24px;
+    resize: none;
+    display: block;
+}
+
+.answer-section #user-input:focus {
+    outline: none;
+}
+
+.answer-section .answer-button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    width: 100%;  
+}
+
+.answer-button-container .btn {
+    border: 2px solid var(--answer-color);
+    background-color: var(--answer-color);  
+}
+
+.answer-button-container .btn:hover {
+    background-color: white;  
+    color: var(--answer-color);
+}
+
+.answer-button-container .btn:active {
+    background-color: var(--answer-color);
+    color: white;
+}
+
+.text {
+    display: inline;
+    font-size: 20px;
+}
+
+.result-container {
+    margin-top: 16px;
+    width: 100%;  
+}
+
+.correct {
+    color: var(--text-color);
+}
+
+.incorrect {
+    color: var(--video-color);
+}
+
+.hidden {
+    color: gray;
+}
