@@ -86,7 +86,7 @@ body * {
     border-radius: 20px;
     padding: 0px 16px;
     background-color: white;
-    font-size: 20px;
+    font-size: 16px;
     color: var(--video-color);
 }
 
@@ -119,6 +119,14 @@ body * {
 .video-section .video-player {
     margin-top: 16px;
     height: var(--video-height);
+    width: 100%;
+    /* border: 2px solid var(--video-color);
+    border-radius: 30px;  */
+}
+
+.video-section .video-player #youtube-player {
+    height: 100%;
+    width: 100%;
     border: 2px solid var(--video-color);
     border-radius: 30px; 
 }
