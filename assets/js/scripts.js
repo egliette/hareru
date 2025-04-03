@@ -16,19 +16,35 @@ function extractVideoId(url) {
     }
 }
 
-function getVideo() {
+async function fetchTranscripts(videoId) {
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/transcripts/${videoId}`);
+        const data = await response.json();
+        
+        if (data.transcript_list) {
+            return data.transcript_list
+        } else {
+            console.error("Error:", data.error);
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+  
+    return null
+}
+  
+async function getVideo() {
     const videoUrl = urlInput.value.trim()
     let videoId = extractVideoId(videoUrl)
     if (videoId) {
-        // iframe.src = `https://www.youtube.com/embed/${videoId}`;
-        // player = new YT.Player(iframe, {
         player = new YT.Player("youtube-player", {
             videoId: videoId,
             events: {
                 "onReady": onPlayerReady
             }
         })
-
+        originaltranscriptList = await fetchTranscripts(videoId);
+        console.log(originaltranscriptList)
     } else {
         alert("Invalid Youtube url.")
     }
