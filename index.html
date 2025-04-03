@@ -35,7 +35,7 @@
                 <div class="video-section col l-6">
                     <div class="video-url">
                         <input type="text" id="url-input" placeholder="Youtube video url" value="https://www.youtube.com/watch?v=wo_e0EvEZn8">
-                        <button onclick="getVideo()">SEARCH</button>
+                        <button id="search-btn">SEARCH</button>
                     </div>
                     <div class="video-player">
                         <div id="youtube-player">
@@ -53,7 +53,7 @@
                         <button class="btn">
                             BACK
                         </button>
-                        <button class="btn">
+                        <button class="btn" id="replay-btn" title="Press Ctrl to replay">
                             REPLAY
                         </button>
                         <button class="btn">
@@ -80,7 +80,7 @@
             </div>
         
         </div>
-        <script src="assets/js/scripts.js"></script>
         <script src="https://www.youtube.com/iframe_api"></script>
+        <script src="assets/js/scripts.js"></script>
     </body>
 </html>

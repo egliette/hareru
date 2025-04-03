@@ -2,9 +2,8 @@ const $ = document.querySelector.bind(document)
 const $$ = document.querySelectorAll.bind(document)
 
 const urlInput = $("#url-input")
-const iframe = document.querySelector("#youtube-player")
-
-let player
+const searchBtn = $("#search-btn")
+const replayBtn = $("#replay-btn")
 
 function extractVideoId(url) {
     const regExp = /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/
@@ -32,33 +31,78 @@ async function fetchTranscripts(videoId) {
   
     return null
 }
-  
-async function getVideo() {
-    const videoUrl = urlInput.value.trim()
-    let videoId = extractVideoId(videoUrl)
-    if (videoId) {
-        player = new YT.Player("youtube-player", {
-            videoId: videoId,
-            events: {
-                "onReady": onPlayerReady
+
+const transcriptManager = {
+    player: null,
+    transcriptList: [],
+    currIdx: 0,
+    intervalIdList: [],
+
+    onPlayerReady: function () {
+        this.player.pauseVideo()
+    },
+
+    initPlayer: async function() {
+        const videoUrl = urlInput.value.trim()
+        let videoId = extractVideoId(videoUrl)
+        if (videoId) {
+            this.player = new YT.Player("youtube-player", {
+                videoId: videoId,
+                events: {
+                    "onReady": () => this.onPlayerReady()
+                }
+            })
+            this.transcriptList = await fetchTranscripts(videoId)
+            this.currIdx = 0
+            this.replay()
+        } else {
+            alert("Invalid Youtube url.")
+        }
+    },
+
+    stopSegment: function() {
+        let currentTime = this.player.getCurrentTime();
+
+        if (currentTime >= this.transcriptList[this.currIdx].start + this.transcriptList[this.currIdx].duration) {
+            this.player.pauseVideo();
+            for (let i=0; i < this.intervalIdList.length; i++) {
+                clearInterval(this.intervalIdList[i])
             }
-        })
-        originaltranscriptList = await fetchTranscripts(videoId);
-        console.log(originaltranscriptList)
-    } else {
-        alert("Invalid Youtube url.")
+        }
+    },
+
+    replay: function() {
+        let start = 0
+        if (this.currIdx > 0) {
+            start = this.transcriptList[this.currIdx-1].start
+        }
+        this.player.seekTo(start, true)
+        this.player.playVideo()
+        let intervalId = setInterval(() => this.stopSegment(), 100)
+        this.intervalIdList.push(intervalId);
+    },
+
+    handleEvents: function() {
+        searchBtn.onclick = () => this.initPlayer()
+        urlInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                this.initPlayer()
+            }
+        });
+        replayBtn.onclick = () => this.replay()
+        
+        document.addEventListener('keydown', (event) => {
+            if (event.ctrlKey) {
+                this.replay()
+            }
+        });
+        
+    },
+
+    start: function() {
+        this.handleEvents()
     }
 }
 
-function onPlayerReady() {
-    player.playVideo()
-}
 
-urlInput.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        getVideo();
-    }
-});
-
-
-
+transcriptManager.start()
