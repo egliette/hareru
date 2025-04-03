@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Youtube Dictation</title>
+        <link rel="icon" href="assets/images/logo.png" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/grid.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Solway:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="navbar">
+            <div class="grid wide">
+                <div class="row">
+                    <div class="logo col">
+                        <img src="assets/images/logo.png" alt="Logo">
+                        <h1>Youtube Dictation</h1>
+                    </div>
+                    <div class="navbar-button-container col">
+                        <a class="navbar-button" href="https://dailydictation.com/" target="_blank">
+                            Try DailyDictation
+                        </a>
+                        <div class="navbar-button">
+                            Setting
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main grid wide">
+            <div class="row">
+                <div class="video-section col l-6">
+                    <div class="video-url">
+                        <input type="text" id="url-input" placeholder="Youtube video url" value="https://www.youtube.com/watch?v=wo_e0EvEZn8">
+                        <button onclick="getVideo()">SEARCH</button>
+                    </div>
+                    <div class="video-player">
+                        <div id="youtube-player">
+                        </div>
+                    </div>
+     
+                    <div class="progress-bar">
+                        <div class="complete-bar">
+                        </div>
+                        <div class="complete-number">
+                            10/20
+                        </div>
+                    </div>
+                    <div class="video-button-container">
+                        <button class="btn">
+                            BACK
+                        </button>
+                        <button class="btn">
+                            REPLAY
+                        </button>
+                        <button class="btn">
+                            NEXT
+                        </button>
+                    </div>
+                </div>
+                <div class="answer-section col l-6">
+                    <textarea id="user-input" name="placeholder" placeholder="Type your dictation here..."></textarea>
+                    <div class="answer-button-container">
+                        <button class="btn">
+                            CHECK
+                        </button>
+                        <button class="btn">
+                            SHOW ANSWER
+                        </button>
+                    </div>
+                    <div class="result-container">
+                        <div class="text correct">Correct </div>
+                        <div class="text incorrect">Incorrect </div>
+                        <div class="text hidden">*** *** ***</div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <script src="assets/js/scripts.js"></script>
+        <script src="https://www.youtube.com/iframe_api"></script>
+    </body>
+</html>
