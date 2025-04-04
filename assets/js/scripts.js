@@ -6,6 +6,9 @@ const searchBtn = $("#search-btn")
 const replayBtn = $("#replay-btn")
 const nextBtn = $("#next-btn")
 const backBtn = $("#back-btn")
+const completeBar = $(".progress-bar .complete-bar");
+const completeNumber = $(".progress-bar .complete-number");
+
 
 function extractVideoId(url) {
     const regExp = /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/
@@ -81,9 +84,23 @@ const transcriptManager = {
         return true;
     },
 
+    updateProgressBar: function() {
+        if (!this.transcriptList || this.transcriptList.length === 0)
+        {
+            completeBar.style.width = "6%";
+            completeNumber.textContent = `0/0`;
+            return
+        } 
+
+        let progressPercentage =  Math.floor((this.currIdx / this.transcriptList.length) * 100);
+        progressPercentage = Math.max(progressPercentage, 6);
+        completeBar.style.width = progressPercentage + "%";
+        completeNumber.textContent = `${this.currIdx}/${this.transcriptList.length}`;
+    },
+
     replay: function() {
         if (!this.checkTranscriptList()) return;
-
+        this.updateProgressBar()
         let start = 0
         if (this.currIdx > 0) {
             start = this.transcriptList[this.currIdx-1].start + this.transcriptList[this.currIdx-1].duration
