@@ -4,6 +4,8 @@ const $$ = document.querySelectorAll.bind(document)
 const urlInput = $("#url-input")
 const searchBtn = $("#search-btn")
 const replayBtn = $("#replay-btn")
+const nextBtn = $("#next-btn")
+const backBtn = $("#back-btn")
 
 function extractVideoId(url) {
     const regExp = /^.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/
@@ -71,15 +73,45 @@ const transcriptManager = {
         }
     },
 
+    checkTranscriptList: function() {
+        if (!this.transcriptList) {
+            alert("Cannot get transcripts of this video.");
+            return false;
+        }
+        return true;
+    },
+
     replay: function() {
+        if (!this.checkTranscriptList()) return;
+
         let start = 0
         if (this.currIdx > 0) {
-            start = this.transcriptList[this.currIdx-1].start
+            start = this.transcriptList[this.currIdx-1].start + this.transcriptList[this.currIdx-1].duration
         }
         this.player.seekTo(start, true)
         this.player.playVideo()
         let intervalId = setInterval(() => this.stopSegment(), 100)
         this.intervalIdList.push(intervalId);
+    },
+
+    nextSegment: function() {
+        if (!this.checkTranscriptList()) return;
+
+        if (this.currIdx >= this.transcriptList.length) {
+            return
+        }
+        this.currIdx += 1
+        this.replay()
+    },
+
+    backSegment: function() {
+        if (!this.checkTranscriptList()) return;
+
+        if (this.currIdx == 0) {
+            return
+        }
+        this.currIdx -= 1
+        this.replay()
     },
 
     handleEvents: function() {
@@ -89,14 +121,16 @@ const transcriptManager = {
                 this.initPlayer()
             }
         });
+
         replayBtn.onclick = () => this.replay()
-        
         document.addEventListener('keydown', (event) => {
             if (event.ctrlKey) {
                 this.replay()
             }
         });
-        
+
+        nextBtn.onclick = () => this.nextSegment()
+        backBtn.onclick = () => this.backSegment()
     },
 
     start: function() {
