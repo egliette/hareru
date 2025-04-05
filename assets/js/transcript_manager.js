@@ -1,13 +1,14 @@
-const $ = document.querySelector.bind(document)
-const $$ = document.querySelectorAll.bind(document)
-
-const urlInput = $("#url-input")
-const searchBtn = $("#search-btn")
-const replayBtn = $("#replay-btn")
-const nextBtn = $("#next-btn")
-const backBtn = $("#back-btn")
-const completeBar = $(".progress-bar .complete-bar");
-const completeNumber = $(".progress-bar .complete-number");
+import { 
+    $,
+    $$,
+    urlInput, 
+    searchBtn, 
+    replayBtn, 
+    nextBtn, 
+    backBtn, 
+    completeBar, 
+    completeNumber 
+} from './dom_elements.js';
 
 
 function extractVideoId(url) {
@@ -45,24 +46,30 @@ const transcriptManager = {
 
     onPlayerReady: function () {
         this.player.pauseVideo()
+        this.replay()
     },
 
     initPlayer: async function() {
         const videoUrl = urlInput.value.trim()
         let videoId = extractVideoId(videoUrl)
-        if (videoId) {
-            this.player = new YT.Player("youtube-player", {
-                videoId: videoId,
-                events: {
-                    "onReady": () => this.onPlayerReady()
-                }
-            })
-            this.transcriptList = await fetchTranscripts(videoId)
-            this.currIdx = 0
-            this.replay()
-        } else {
+        if (!videoId) {
             alert("Invalid Youtube url.")
+            return
         }
+
+        this.transcriptList = await fetchTranscripts(videoId)
+        if (!this.transcriptList) {
+            this.checkTranscriptList()
+            return
+        }
+
+        this.currIdx = 0
+        this.player = new YT.Player("youtube-player", {
+            videoId: videoId,
+            events: {
+                "onReady": () => this.onPlayerReady()
+            }
+        })
     },
 
     stopSegment: function() {
@@ -150,10 +157,16 @@ const transcriptManager = {
         backBtn.onclick = () => this.backSegment()
     },
 
+    getCurrInfo: function() {
+        if (this.transcriptList === null)
+            return null
+        return this.transcriptList[this.currIdx]
+    },
+
     start: function() {
         this.handleEvents()
     }
 }
 
 
-transcriptManager.start()
+export default transcriptManager
