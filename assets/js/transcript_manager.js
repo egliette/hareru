@@ -64,6 +64,14 @@ const transcriptManager = {
         }
 
         this.currIdx = 0
+
+        if (this.player) {
+            this.player.destroy();
+            for (let i=0; i < this.intervalIdList.length; i++) {
+                clearInterval(this.intervalIdList[i])
+            }
+        }
+
         this.player = new YT.Player("youtube-player", {
             videoId: videoId,
             events: {
@@ -139,13 +147,6 @@ const transcriptManager = {
     },
 
     handleEvents: function() {
-        searchBtn.onclick = () => this.initPlayer()
-        urlInput.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                this.initPlayer()
-            }
-        });
-
         replayBtn.onclick = () => this.replay()
         document.addEventListener('keydown', (event) => {
             if (event.ctrlKey) {

@@ -12,17 +12,25 @@ import {
 import transcriptManager from './transcript_manager.js'
 
 
-transcriptManager.start()
+
 
 const answerChecker = {
-    
+    transManager: transcriptManager,
+
     handleEvents: function() {
-    
+        searchBtn.onclick = () => this.transManager.initPlayer()
+        urlInput.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                this.transManager.initPlayer()
+            }
+        });
+
     },
 
     start: function() {
+        this.transManager.start()
         this.handleEvents()
     }
 } 
 
-answerChecker.start
+answerChecker.start()
