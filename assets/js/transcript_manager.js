@@ -7,7 +7,8 @@ import {
     nextBtn, 
     backBtn, 
     completeBar, 
-    completeNumber 
+    completeNumber,
+    loadingContainer,
 } from './dom_elements.js';
 
 
@@ -50,16 +51,19 @@ const transcriptManager = {
     },
 
     initPlayer: async function() {
+        loadingContainer.style.display = "flex"
         const videoUrl = urlInput.value.trim()
         let videoId = extractVideoId(videoUrl)
         if (!videoId) {
             alert("Invalid Youtube url.")
+            loadingContainer.style.display = "none"
             return
         }
 
         this.transcriptList = await fetchTranscripts(videoId)
         if (!this.transcriptList) {
             this.checkTranscriptList()
+            loadingContainer.style.display = "none"
             return
         }
 
@@ -78,6 +82,8 @@ const transcriptManager = {
                 "onReady": () => this.onPlayerReady()
             }
         })
+
+        loadingContainer.style.display = "none"
     },
 
     stopSegment: function() {

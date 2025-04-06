@@ -8,3 +8,4 @@ export const nextBtn = $("#next-btn");
 export const backBtn = $("#back-btn");
 export const completeBar = $(".progress-bar .complete-bar");
 export const completeNumber = $(".progress-bar .complete-number");
+export const loadingContainer = $("#loading-container");
