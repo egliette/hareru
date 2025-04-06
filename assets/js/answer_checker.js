@@ -7,15 +7,122 @@ import {
     nextBtn, 
     backBtn, 
     completeBar, 
-    completeNumber 
+    completeNumber,
+    checkBtn,
+    userInput,
+    hintContainer,
+    correctAnswerText,
+    incorrectWordText,
+    hiddenAnswerText,
 } from './dom_elements.js';
 import transcriptManager from './transcript_manager.js'
 
 
 
+function cleanText(text) {
+    text = text.replace(/\u2013|\u2014/g, "-")
+    return text
+        .replace(/^[\s.,;'"`-]+|[\s.,;'"`-]+$/g, '')
+        .toLowerCase();
+}
+
+function trimSymbols(text) {
+    return text.replace(/^[`";,.\-?{}\\|]+|[`";,.\-?{}\\|]+$/g, '')
+}
+
+function splitWords(text) {
+    let words = text.split(/[\s\n]+/)
+    return words.map(word => trimSymbols(word))
+}
+
+function cleanAndSplit(text) {
+    return splitWords(cleanText(text))
+}
+
+function naiveCleanText(text) {
+    text = text.replace(/\u2013|\u2014/g, "-")
+    return text.replace(/^[\s.,;'"`-]+|[\s.,;'"`-]+$/g, '')
+}
+
+function naiveSplitWords(text) {
+    return text.split(/[\s\n]+/)
+}
+
+function naiveCleanAndSplit(text) {
+    return naiveSplitWords(naiveCleanText(text))
+}
+
+function findSimilarSublist(list1, list2) {
+    let intersection = [];
+    let i = 0;
+    
+    while (i < list1.length && i < list2.length && list1[i] === list2[i]) {
+        intersection.push(list1[i]);
+        i++;
+    }
+
+    return intersection;
+}
+
+function convertToAsterisks(text) {
+    return '*'.repeat(text.length);
+}
 
 const answerChecker = {
     transManager: transcriptManager,
+
+    checkAnswer: function() {
+        let userAnswer = userInput.value
+        let transInfo = this.transManager.getCurrInfo()
+
+        if (!transInfo) {  
+            return false
+        } 
+
+        let correctAnswer = transInfo["text"]
+
+        userAnswer = cleanAndSplit(userAnswer)
+        correctAnswer = cleanAndSplit(correctAnswer)
+
+        if (userAnswer.length !== correctAnswer.length) {
+            return false
+        }
+        
+        return userAnswer.every((item, index) => item === correctAnswer[index]);
+    },
+
+    updateHint: function() {
+        let userAnswer = userInput.value
+        let transInfo = this.transManager.getCurrInfo()
+
+        if (!transInfo) {  
+            return false
+        } 
+
+        let correctAnswer = transInfo["text"]
+        let rawCorrectAnswer = naiveCleanAndSplit(correctAnswer)
+
+        userAnswer = cleanAndSplit(userAnswer)
+        correctAnswer = cleanAndSplit(correctAnswer)
+
+        let similarAnswer = findSimilarSublist(userAnswer, correctAnswer)
+        
+        let remainAnswer = correctAnswer.slice(similarAnswer.length)
+        let nextWord = remainAnswer[0]
+        remainAnswer = remainAnswer.slice(1)
+        remainAnswer = remainAnswer.map(word => convertToAsterisks(word))
+
+        rawCorrectAnswer = rawCorrectAnswer.slice(0, similarAnswer.length)
+        
+        correctAnswerText.textContent = rawCorrectAnswer.join(" ")
+        incorrectWordText.textContent = nextWord
+        hiddenAnswerText.textContent = remainAnswer.join(" ")
+    },
+
+    compareAnswer: function() {
+        this.updateHint()
+        let result = this.checkAnswer()
+    },
 
     handleEvents: function() {
         searchBtn.onclick = () => this.transManager.initPlayer()
@@ -23,8 +130,15 @@ const answerChecker = {
             if (event.key === "Enter") {
                 this.transManager.initPlayer()
             }
-        });
-
+        })
+        
+        checkBtn.onclick = () => this.compareAnswer()
+        userInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                this.compareAnswer()
+            }
+        })
     },
 
     start: function() {
