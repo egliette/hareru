@@ -132,7 +132,7 @@ const transcriptManager = {
         this.intervalIdList.push(intervalId);
     },
 
-    nextSegment: function() {
+    nextSegment: async function() {
         if (!this.checkTranscriptList()) return;
 
         if (this.currIdx >= this.transcriptList.length) {
@@ -142,7 +142,7 @@ const transcriptManager = {
         this.replay()
     },
 
-    backSegment: function() {
+    backSegment: async function() {
         if (!this.checkTranscriptList()) return;
 
         if (this.currIdx == 0) {
@@ -159,9 +159,6 @@ const transcriptManager = {
                 this.replay()
             }
         });
-
-        nextBtn.onclick = () => this.nextSegment()
-        backBtn.onclick = () => this.backSegment()
     },
 
     getCurrInfo: function() {

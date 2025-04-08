@@ -70,6 +70,7 @@ function convertToAsterisks(text) {
 
 const answerChecker = {
     transManager: transcriptManager,
+    isCorrect: false,
 
     checkAnswer: function() {
         let userAnswer = userInput.value
@@ -119,26 +120,76 @@ const answerChecker = {
         hiddenAnswerText.textContent = remainAnswer.join(" ")
     },
 
+    resetHint: function() {
+        userInput.value = ""
+        let transInfo = this.transManager.getCurrInfo()
+
+        if (!transInfo) {  
+            return 
+        } 
+
+        let correctAnswer = transInfo["text"]
+        correctAnswer = cleanAndSplit(correctAnswer)
+        
+        let hiddenAnswer = correctAnswer.map(word => convertToAsterisks(word))
+        
+        correctAnswerText.textContent = ""
+        incorrectWordText.textContent = ""
+        hiddenAnswerText.textContent = hiddenAnswer.join(" ")   
+    },
+
     compareAnswer: function() {
         this.updateHint()
-        let result = this.checkAnswer()
+        this.isCorrect = this.checkAnswer()
+        if (this.isCorrect) {
+            checkBtn.textContent  = "NEXT"
+        }
+    },
+
+    initPlayerAndTrans: async function() {
+        await this.transManager.initPlayer()
+        this.resetHint()
+    },
+
+    compareAnswerOrNext: async function() {
+        if (!this.isCorrect) {
+            this.compareAnswer()
+        } else {
+            await this.transManager.nextSegment()
+            checkBtn.textContent = "CHECK"
+            this.isCorrect = false
+            this.resetHint()
+        }
+    },
+
+    nextSegment: async function() {
+        await this.transManager.nextSegment()
+        this.resetHint()
+    },
+
+    backSegment: async function() {
+        await this.transManager.backSegment()
+        this.resetHint()
     },
 
     handleEvents: function() {
-        searchBtn.onclick = () => this.transManager.initPlayer()
+        searchBtn.onclick = () => this.initPlayerAndTrans()
         urlInput.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
-                this.transManager.initPlayer()
+                this.initPlayerAndTrans()
             }
         })
         
-        checkBtn.onclick = () => this.compareAnswer()
+        checkBtn.onclick = () => this.compareAnswerOrNext()
         userInput.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 event.preventDefault();
-                this.compareAnswer()
+                this.compareAnswerOrNext()
             }
         })
+
+        nextBtn.onclick = () => this.nextSegment()
+        backBtn.onclick = () => this.backSegment()
     },
 
     start: function() {
