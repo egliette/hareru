@@ -11,6 +11,7 @@ export const completeNumber = $(".progress-bar .complete-number")
 export const loadingContainer = $("#loading-container")
 
 export const checkBtn = $("#check-btn")
+export const showBtn = $("#show-btn")
 export const userInput = $("#user-input")
 export const hintContainer = $(".hint-container")
 export const correctAnswerText = $(".hint-container .correct")

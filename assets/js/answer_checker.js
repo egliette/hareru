@@ -9,6 +9,7 @@ import {
     completeBar, 
     completeNumber,
     checkBtn,
+    showBtn,
     userInput,
     hintContainer,
     correctAnswerText,
@@ -162,6 +163,18 @@ const answerChecker = {
         }
     },
 
+    showAnswer: function() {
+        let transInfo = this.transManager.getCurrInfo()
+
+        if (!transInfo) {  
+            return
+        } 
+        userInput.value = 
+        correctAnswerText.textContent = ""
+        incorrectWordText.textContent = ""
+        hiddenAnswerText.textContent = transInfo["text"]
+    },
+
     nextSegment: async function() {
         await this.transManager.nextSegment()
         this.resetHint()
@@ -187,6 +200,8 @@ const answerChecker = {
                 this.compareAnswerOrNext()
             }
         })
+
+        showBtn.onclick = () => this.showAnswer()
 
         nextBtn.onclick = () => this.nextSegment()
         backBtn.onclick = () => this.backSegment()
