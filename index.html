@@ -23,7 +23,7 @@
                         <a class="navbar-button" href="https://dailydictation.com/" target="_blank">
                             Try DailyDictation
                         </a>
-                        <div class="navbar-button">
+                        <div class="navbar-button" id="setting-button">
                             Setting
                         </div>
                     </div>
@@ -83,6 +83,16 @@
             </div>
         
         </div>
+
+        <div class="popup-overlay row">
+            <div class="popup-content col l-o-4 l-4">
+                <h2>Settings</h2>
+                <label for="max-seconds">Max seconds per segment</label>
+                <input type="number" id="max-seconds" name="max-seconds" min="0" step="1" value="0"/>
+                <button class="btn apply-button">Apply</button>
+            </div>
+        </div>
+
         <script src="https://www.youtube.com/iframe_api"></script>
         <script type="module" src="assets/js/answer_checker.js"></script>
     </body>

@@ -63,6 +63,7 @@ body * {
     display: flex; 
     align-items: center;
     padding: 0px 16px;
+    cursor: pointer;
 }
 
 .navbar .navbar-button:hover {
@@ -282,4 +283,68 @@ body * {
 
 .hidden {
     color: gray;
+}
+
+
+.popup-overlay.row{
+    position: fixed;
+    margin: 0;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 24px !important;
+    border-radius: 8px;
+    color: var(--text-color);
+}
+
+.popup-content h2 {
+    font-size: 36px;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.popup-content label {
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.popup-content input {
+    display: block;
+    width: 100%;
+    height: 24px;
+    padding: 16px;
+    border: 2px solid var(--text-color);
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 16px;
+    color: var(--answer-color);
+}
+
+.popup-content .apply-button {
+    margin: 24px auto 0;
+    text-align: center;
+    background-color: var(--answer-color);
+    border-color: var(--answer-color);
+}
+
+.popup-content .apply-button:hover {
+    color: var(--answer-color);
+    background-color: white;
 }

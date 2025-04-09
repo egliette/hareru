@@ -15,6 +15,10 @@ import {
     correctAnswerText,
     incorrectWordText,
     hiddenAnswerText,
+    settingBtn,
+    applyBtn,
+    popupOverlay,
+    popupContent,
 } from './dom_elements.js';
 import transcriptManager from './transcript_manager.js'
 
@@ -169,7 +173,6 @@ const answerChecker = {
         if (!transInfo) {  
             return
         } 
-        userInput.value = 
         correctAnswerText.textContent = ""
         incorrectWordText.textContent = ""
         hiddenAnswerText.textContent = transInfo["text"]
@@ -183,6 +186,16 @@ const answerChecker = {
     backSegment: async function() {
         await this.transManager.backSegment()
         this.resetHint()
+    },
+
+    displaySetting: function() {
+        popupOverlay.style.display = "flex"
+        popupContent.style.display = "flex"
+    },
+
+    hideSetting: function() {
+        popupOverlay.style.display = "none"
+        popupContent.style.display = "none"
     },
 
     handleEvents: function() {
@@ -205,6 +218,16 @@ const answerChecker = {
 
         nextBtn.onclick = () => this.nextSegment()
         backBtn.onclick = () => this.backSegment()
+        
+        applyBtn.onclick = () => this.hideSetting()
+        settingBtn.onclick = () => this.displaySetting()
+        popupOverlay.addEventListener('click', () => {
+            this.hideSetting()
+        });
+        
+        popupContent.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
     },
 
     start: function() {

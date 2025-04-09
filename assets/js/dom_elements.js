@@ -1,6 +1,11 @@
 export const $ = document.querySelector.bind(document)
 export const $$ = document.querySelectorAll.bind(document)
 
+export const settingBtn = $("#setting-button")
+export const applyBtn = $(".apply-button")
+export const popupOverlay = $(".popup-overlay")
+export const popupContent = $(".popup-content")
+
 export const urlInput = $("#url-input")
 export const searchBtn = $("#search-btn")
 export const replayBtn = $("#replay-btn")
