@@ -22,3 +22,5 @@ export const hintContainer = $(".hint-container")
 export const correctAnswerText = $(".hint-container .correct")
 export const incorrectWordText = $(".hint-container .incorrect")
 export const hiddenAnswerText = $(".hint-container .hidden")
+
+export const maxSecondsInput = $(".max-seconds")

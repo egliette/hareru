@@ -1,6 +1,4 @@
 import { 
-    $,
-    $$,
     urlInput, 
     searchBtn, 
     replayBtn, 
@@ -19,6 +17,7 @@ import {
     applyBtn,
     popupOverlay,
     popupContent,
+    maxSecondsInput,
 } from './dom_elements.js';
 import transcriptManager from './transcript_manager.js'
 
@@ -73,9 +72,11 @@ function convertToAsterisks(text) {
     return '*'.repeat(text.length);
 }
 
+
 const answerChecker = {
     transManager: transcriptManager,
     isCorrect: false,
+    secondsPerSegment: 0,
 
     checkAnswer: function() {
         let userAnswer = userInput.value
@@ -193,9 +194,17 @@ const answerChecker = {
         popupContent.style.display = "flex"
     },
 
-    hideSetting: function() {
+    applyAndhideSetting: function() {
         popupOverlay.style.display = "none"
         popupContent.style.display = "none"
+
+        let newSecondsPerSegment = maxSecondsInput.value
+        
+        if (newSecondsPerSegment == this.secondsPerSegment) {
+            return
+        }
+        this.secondsPerSegment = newSecondsPerSegment
+        this.transManager.updateMaxSeconds(secondsPerSegment)
     },
 
     handleEvents: function() {
@@ -219,10 +228,10 @@ const answerChecker = {
         nextBtn.onclick = () => this.nextSegment()
         backBtn.onclick = () => this.backSegment()
         
-        applyBtn.onclick = () => this.hideSetting()
+        applyBtn.onclick = () => this.applyAndhideSetting()
         settingBtn.onclick = () => this.displaySetting()
         popupOverlay.addEventListener('click', () => {
-            this.hideSetting()
+            this.applyAndhideSetting()
         });
         
         popupContent.addEventListener('click', (event) => {

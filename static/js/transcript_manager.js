@@ -1,11 +1,6 @@
 import { 
-    $,
-    $$,
-    urlInput, 
-    searchBtn, 
+    urlInput,  
     replayBtn, 
-    nextBtn, 
-    backBtn, 
     completeBar, 
     completeNumber,
     loadingContainer,
@@ -150,6 +145,31 @@ const transcriptManager = {
         }
         this.currIdx -= 1
         this.replay()
+    },
+
+    updateMaxSeconds: function () {
+        const numSegments = this.transcriptList.length;
+        let concatenatedList = [];
+        let parts = [];
+        let totalDuration = 0;
+    
+        for (let i = 0; i < numSegments; i++) {
+            parts.push(paragraphs[i]);
+            totalDuration += paragraphs[i].duration;
+            if (totalDuration > secondsPerPart) {
+                newPart = mergeParts(parts);
+                concatenatedList.push(newPart);
+                parts = [];
+                totalDuration = 0;
+            }
+        }
+    
+        if (parts.length > 0) {
+            newPart = mergeParts(parts);
+            concatenatedList.push(newPart);
+        }
+    
+        return concatenatedList;
     },
 
     handleEvents: function() {
