@@ -17,7 +17,7 @@ import {
     applyBtn,
     popupOverlay,
     popupContent,
-    maxSecondsInput,
+
 } from './dom_elements.js';
 import transcriptManager from './transcript_manager.js'
 
@@ -36,7 +36,9 @@ function trimSymbols(text) {
 
 function splitWords(text) {
     let words = text.split(/[\s\n]+/)
-    return words.map(word => trimSymbols(word))
+    words = words.map(word => trimSymbols(word))
+    words = words.filter(word => word.trim() !== '')
+    return words
 }
 
 function cleanAndSplit(text) {
@@ -48,12 +50,8 @@ function naiveCleanText(text) {
     return text.replace(/^[\s.,;'"`-]+|[\s.,;'"`-]+$/g, '')
 }
 
-function naiveSplitWords(text) {
-    return text.split(/[\s\n]+/)
-}
-
 function naiveCleanAndSplit(text) {
-    return naiveSplitWords(naiveCleanText(text))
+    return splitWords(naiveCleanText(text))
 }
 
 function findSimilarSublist(list1, list2) {
@@ -76,7 +74,6 @@ function convertToAsterisks(text) {
 const answerChecker = {
     transManager: transcriptManager,
     isCorrect: false,
-    secondsPerSegment: 0,
 
     checkAnswer: function() {
         let userAnswer = userInput.value
@@ -129,7 +126,7 @@ const answerChecker = {
     resetHint: function() {
         userInput.value = ""
         let transInfo = this.transManager.getCurrInfo()
-
+  
         if (!transInfo) {  
             return 
         } 
@@ -197,14 +194,12 @@ const answerChecker = {
     applyAndhideSetting: function() {
         popupOverlay.style.display = "none"
         popupContent.style.display = "none"
-
-        let newSecondsPerSegment = maxSecondsInput.value
-        
-        if (newSecondsPerSegment == this.secondsPerSegment) {
+        if (!this.transManager.checkTranscriptList()) {
             return
         }
-        this.secondsPerSegment = newSecondsPerSegment
-        this.transManager.updateMaxSeconds(secondsPerSegment)
+        this.transManager.updateMaxSeconds()
+        this.transManager.replay()
+        this.resetHint()
     },
 
     handleEvents: function() {

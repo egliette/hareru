@@ -1,4 +1,5 @@
 import { 
+    $,
     urlInput,  
     replayBtn, 
     completeBar, 
@@ -34,11 +35,27 @@ async function fetchTranscripts(videoId) {
     return null
 }
 
+function mergeSegments(parts) {
+    let newSegment = {
+        start: parts[0].start,
+        duration: parts[0].duration,
+        text: parts[0].text,
+    };
+    for (let partId = 1; partId < parts.length; partId++) {
+        newSegment.duration += parts[partId].duration;
+        newSegment.text += " " + parts[partId].text;
+    }
+
+    return newSegment;
+}
+  
+
 const transcriptManager = {
     player: null,
     transcriptList: [],
     currIdx: 0,
     intervalIdList: [],
+    secondsPerSegment: 0,
 
     onPlayerReady: function () {
         this.player.pauseVideo()
@@ -54,14 +71,14 @@ const transcriptManager = {
             loadingContainer.style.display = "none"
             return
         }
-
         this.transcriptList = await fetchTranscripts(videoId)
         if (!this.transcriptList) {
             this.checkTranscriptList()
             loadingContainer.style.display = "none"
             return
         }
-
+        
+        this.updateMaxSeconds()
         this.currIdx = 0
 
         if (this.player) {
@@ -93,7 +110,7 @@ const transcriptManager = {
     },
 
     checkTranscriptList: function() {
-        if (!this.transcriptList) {
+        if (this.transcriptList.length === 0) {
             alert("Cannot get transcripts of this video.");
             return false;
         }
@@ -148,28 +165,37 @@ const transcriptManager = {
     },
 
     updateMaxSeconds: function () {
+        const maxSecondsInput = $("#max-seconds")
+        let newSecondsPerSegment = maxSecondsInput.value
+        
+        if (newSecondsPerSegment == this.secondsPerSegment) {
+            return
+        }
+        this.secondsPerSegment = newSecondsPerSegment
+
         const numSegments = this.transcriptList.length;
         let concatenatedList = [];
-        let parts = [];
+        let segments = [];
         let totalDuration = 0;
     
         for (let i = 0; i < numSegments; i++) {
-            parts.push(paragraphs[i]);
-            totalDuration += paragraphs[i].duration;
-            if (totalDuration > secondsPerPart) {
-                newPart = mergeParts(parts);
-                concatenatedList.push(newPart);
-                parts = [];
+            segments.push(this.transcriptList[i]);
+            totalDuration += this.transcriptList[i].duration;
+            if (totalDuration > this.secondsPerSegment) {
+                let newSegment = mergeSegments(segments);
+                concatenatedList.push(newSegment);
+                segments = [];
                 totalDuration = 0;
             }
         }
     
-        if (parts.length > 0) {
-            newPart = mergeParts(parts);
+        if (segments.length > 0) {
+            newPart = mergeSegments(segments);
             concatenatedList.push(newPart);
         }
     
-        return concatenatedList;
+        this.transcriptList = concatenatedList;
+        this.currIdx = 0
     },
 
     handleEvents: function() {
