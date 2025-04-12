@@ -20,7 +20,7 @@
                         <h1>Youtube Dictation</h1>
                     </div>
                     <div class="navbar-button-container col">
-                        <a class="navbar-button" href="https://dailydictation.com/" target="_blank">
+                        <a class="navbar-button" id="dailydictation" href="https://dailydictation.com/" target="_blank">
                             Try DailyDictation
                         </a>
                         <div class="navbar-button" id="setting-button">
@@ -32,7 +32,7 @@
         </div>
         <div class="main grid wide">
             <div class="row">
-                <div class="video-section col l-6">
+                <div class="video-section col l-6 m-12">
                     <div class="video-url">
                         <input type="text" id="url-input" placeholder="Youtube video url" value="https://www.youtube.com/watch?v=wo_e0EvEZn8">
                         <button id="search-btn">SEARCH</button>
@@ -64,7 +64,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="answer-section col l-6">
+                <div class="answer-section col l-6 m-12">
                     <textarea id="user-input" name="placeholder" placeholder="Type your dictation here..."></textarea>
                     <div class="answer-button-container">
                         <button class="btn" id="check-btn" title="Press Enter to check">
@@ -85,7 +85,7 @@
         </div>
 
         <div class="popup-overlay row">
-            <div class="popup-content col l-o-4 l-4">
+            <div class="popup-content col l-o-4 l-4 m-o-2 m-8">
                 <h2>Settings</h2>
                 <label for="max-seconds">Max seconds per segment</label>
                 <input type="number" id="max-seconds" name="max-seconds" min="0" step="1" value="0"/>

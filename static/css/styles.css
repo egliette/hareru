@@ -4,6 +4,8 @@
     --text-color: #617B47;
     --answer-color: #8DBA30;
     --video-height: 320px;
+    --video-height-tablet: 300px;
+    --video-height-mobile: 200px;
 }
 
 * {
@@ -99,10 +101,9 @@ body * {
     border: 2px solid var(--video-color);
     margin: -2px;
     border-radius: 20px;
-    padding: 0px 8px;
     font-size: 20px;
     font-weight: bold;
-    padding: 0 16px;
+    padding: 0px 16px;
     background-color: var(--video-color);
     color: white;
 }
@@ -347,4 +348,283 @@ body * {
 .popup-content .apply-button:hover {
     color: var(--answer-color);
     background-color: white;
+}
+
+/* Mobile & tablet */
+@media (max-width: 1023px) {
+    .hide-on-mobile-tablet {
+        display: none;
+    }
+}
+
+/* Tablet */
+@media (min-width: 740px) and (max-width: 1023px) {
+    .hide-on-tablet {
+        display: none;
+    }   
+    
+    .navbar .row {
+        height: 45px;
+    }
+
+    .navbar .logo {
+        gap: 8px;
+    }
+    
+    .navbar .logo h1 {
+        font-size: 25px;
+    }
+
+    .navbar .navbar-button {
+        font-size: 18px;
+        padding: 0px 8px;
+    }
+
+    .video-section .video-url {
+        margin-top: 12px;
+        height: 35px;
+        border-radius: 18px;
+    }
+
+    .video-section .video-url #url-input {
+        border-radius: 18px;
+        padding: 0px 12px;
+        font-size: 14px;
+    }
+
+    .video-section .video-url button {
+        margin: -2px;
+        border-radius: 18px;
+        font-size: 16px;
+        padding: 0px 12px;
+    }
+        
+    .video-section .video-player {
+        margin-top: 8px;
+        height: var(--video-height-tablet);
+    }
+
+    .video-section .video-player #youtube-player {
+        border-radius: 25px; 
+    }
+
+    .video-section .video-player #loading-container {
+        border-radius: 25px;
+    }
+
+    .video-section .video-player #loading-container .spinner {
+        width: 58px;
+        height: 58px;
+    }
+
+    .video-section .progress-bar {
+        margin-top: 8px;
+        height: 35px;
+        border-radius: 18px;
+    }
+
+    .video-section .progress-bar .complete-bar {
+        margin-top: -2px;
+        border-radius: 18px;
+    }
+
+    .video-section .progress-bar .complete-number {
+        font-size: 16px;
+    }
+
+    .video-section .video-button-container {
+        margin-top: 8px;
+    }
+    
+    .btn {
+        border-radius: 18px;
+        height: 35px;
+        padding: 0 20px;
+        font-size: 16px;
+    }
+
+    .answer-section #user-input {
+        margin: 16px 0 0 0;
+        height: var(--video-height-tablet);
+        border-radius: 25px;
+        font-size: 16px;
+        padding: 16px;
+    }
+
+    .answer-section .answer-button-container {
+        margin-top: 8px; 
+    }
+
+    .text {
+        font-size: 16px;
+    }
+
+    .hint-container {
+        margin-top: 8px;
+    }
+   
+    .popup-content {
+        padding: 20px !important;
+        border-radius: 8px;
+    }
+
+    .popup-content h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .popup-content label {
+        margin-bottom: 8px;
+        font-size: 12px;
+    }
+
+    .popup-content input {
+        height: 20px;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+
+    .popup-content .apply-button {
+        margin: 20px auto 0;
+    }
+}
+
+/* Mobile */
+@media (max-width: 739px) {
+    .hide-on-tablet {
+        display: none;
+    }
+
+    .navbar .row {
+        height: 30px;
+    }
+
+    .navbar .logo {
+        gap: 6px;
+    }
+
+    .navbar .logo h1 {
+        font-size: 16px;
+    }
+
+    .navbar #dailydictation {
+        display: none;
+    }
+
+    .navbar .navbar-button {
+        font-size: 12px;
+        padding: 0px 4px;
+    }
+
+    .video-section .video-url {
+        margin-top: 6px;
+        height: 25px;
+        border-radius: 18px;
+    }
+
+    .video-section .video-url #url-input {
+        border-radius: 18px;
+        padding: 0px 8px;
+        font-size: 10px;
+    }
+
+    .video-section .video-url button {
+        margin: -2px;
+        border-radius: 18px;
+        font-size: 12px;
+        padding: 0px 8px;
+    }
+        
+    .video-section .video-player {
+        margin-top: 8px;
+        height: var(--video-height-mobile);
+    }
+
+    .video-section .video-player #youtube-player {
+        border-radius: 25px; 
+    }
+
+    .video-section .video-player #loading-container {
+        border-radius: 25px;
+    }
+
+    .video-section .video-player #loading-container .spinner {
+        width: 40px;
+        height: 40px;
+    }
+
+    .video-section .progress-bar {
+        margin-top: 8px;
+        height: 25px;
+        border-radius: 18px;
+    }
+
+    .video-section .progress-bar .complete-bar {
+        margin-top: -2px;
+        border-radius: 18px;
+    }
+
+    .video-section .progress-bar .complete-number {
+        font-size: 12px;
+    }
+
+    .video-section .video-button-container {
+        margin-top: 8px;
+    }
+    
+    .btn {
+        border-radius: 18px;
+        height: 25px;
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+    .answer-section #user-input {
+        margin: 12px 0 0 0;
+        height: var(--video-height-mobile);
+        border-radius: 25px;
+        font-size: 12px;
+        padding: 12px;
+    }
+
+    .answer-section .answer-button-container {
+        margin-top: 8px; 
+    }
+
+    .text {
+        font-size: 12px;
+    }
+
+    .hint-container {
+        margin-top: 8px;
+    }
+   
+    .popup-content {
+        padding: 20px !important;
+        border-radius: 8px;
+    }
+
+    .popup-content h2 {
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
+
+    .popup-content label {
+        margin-bottom: 8px;
+        font-size: 12px;
+    }
+
+    .popup-content input {
+        height: 20px;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+
+    .popup-content .apply-button {
+        margin: 20px auto 0;
+    }
 }

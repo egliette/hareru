@@ -26,6 +26,6 @@ Your website will be available at "http://localhost:8000/"
 - [x] Clear hint when press next or back
 - [x] Auto clear when go to next segment
 - [x] Add setting
+- [x] Responsive UI
 - [ ] Add random chatbot
-- [ ] Responsive UI
 - [ ] Add Ads

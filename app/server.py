@@ -35,7 +35,3 @@ async def get_transcripts(video_id: str):
     except Exception as e:
         return JSONResponse(content={"error": str(e)})
 
-
-
-
-
