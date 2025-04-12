@@ -2,23 +2,19 @@
 
 Practicing dictation with youtube videos
 
-## Installation
-
-Install dependencies:
-
-```
-pip install -r requirements.txt
-```
+![sample website UI](static/images/page.png)
 
 ## Usage
 
 Start server:
 
+
 ```
-uvicorn app.server:app --reload
+docker-compose up -d
 ```
 
-Your website will be available at "http://localhost:8000/"
+Your website will be available at "http://localhost:8005/"
+
 
 ## Todo
 

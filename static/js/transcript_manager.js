@@ -20,7 +20,7 @@ function extractVideoId(url) {
 
 async function fetchTranscripts(videoId) {
     try {
-        const response = await fetch(`http://127.0.0.1:8000/transcripts/${videoId}`);
+        const response = await fetch(`http://localhost:8005/transcripts/${videoId}`);
         const data = await response.json();
         
         if (data.transcript_list) {

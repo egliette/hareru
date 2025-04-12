@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  hareru:
+    image: hareru:0.1.0
+    container_name: hareru
+    build: .
+    volumes:
+      - ./:/app
+    ports:
+      - 8005:8000
+    command: ["uvicorn", "app.server:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
