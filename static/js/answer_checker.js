@@ -19,7 +19,7 @@ import {
     popupContent,
 
 } from './dom_elements.js';
-import transcriptManager from './transcript_manager.js'
+import transcriptManager from './transcript_manager.js?v=0.1.1'
 
 
 

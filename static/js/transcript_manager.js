@@ -20,7 +20,7 @@ function extractVideoId(url) {
 
 async function fetchTranscripts(videoId) {
     try {
-        const response = await fetch(`http://localhost:8005/transcripts/${videoId}`);
+        const response = await fetch(`https://hareru.egliette.io.vn/transcripts/${videoId}`);
         const data = await response.json();
         
         if (data.transcript_list) {
