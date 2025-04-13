@@ -1,6 +1,7 @@
 import { 
     $,
-    urlInput,  
+    urlInput, 
+    userInput, 
     replayBtn, 
     completeBar, 
     completeNumber,
@@ -200,11 +201,12 @@ const transcriptManager = {
 
     handleEvents: function() {
         replayBtn.onclick = () => this.replay()
-        document.addEventListener('keydown', (event) => {
+        userInput.addEventListener('keydown', (event) => {
             if (event.ctrlKey) {
                 this.replay()
             }
         });
+
     },
 
     getCurrInfo: function() {
