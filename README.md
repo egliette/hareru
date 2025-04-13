@@ -28,3 +28,4 @@ Your website will be available at "http://localhost:8005/"
 - [ ] Add tutorials
 - [ ] Add shortcut
 - [ ] Change asterisks into [5 character(s)]
+- [ ] Add pre-commit hooks
