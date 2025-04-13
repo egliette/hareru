@@ -25,3 +25,6 @@ Your website will be available at "http://localhost:8005/"
 - [x] Responsive UI
 - [ ] Add random chatbot
 - [ ] Add Ads
+- [ ] Add tutorials
+- [ ] Add shortcut
+- [ ] Change asterisks into [5 character(s)]
